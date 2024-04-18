@@ -1,0 +1,69 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+.buttonClass {
+  @apply mt-1.5 inline-block bg-black px-5 py-3 text-xs font-medium uppercase tracking-wide text-white
+}
+
+.bgImg {
+  background-size: 100% 100%;
+  background-image:
+    linear-gradient(360deg, rgba(10, 13, 23, 0.95) 20.4%, rgba(10, 13, 23, 0) 100%),
+    url(.../../../../public/bg.jpg);
+  background-repeat: no-repeat;
+  height: 89vh;
+  width: 100%;
+}
+
+.afterLoginbg {
+  background-size: 100% 100%;
+  background-image:
+    linear-gradient(360deg, rgba(10, 13, 23, 0.95) 20.4%, rgba(10, 13, 23, 0) 100%),
+    url(.../../../../public/bryan-hanson.jpg);
+  background-repeat: no-repeat;
+  height: 89vh;
+  width: 100%;
+}
+
+#upload-btn-wrapper {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+}
+
+#fileInput {
+  font-size: 100px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+}
+
+#upload-btn-wrapper .btn {
+  border: 2px solid gray;
+  color: gray;
+  background-color: white;
+  padding: 8px 20px;
+  border-radius: 8px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+#upload-btn-wrapper .btn:hover {
+  border-color: black;
+}
