@@ -53,14 +53,14 @@ export default function Navbar() {
                     <div className={`items-center justify-between w-full md:flex md:w-auto ${navClick ? '' : 'hidden'}`} id="navbar-user">
                         <ul className={`flex flex-col font-medium p-4 md:p-0 mt-4  md:flex-row md:space-x-8   md:mt-0 md:border-0 `}>
                             <li>
-                                <Link href="/"
+                                <Link href="/" onClick={() => { router.push("/"); onMenuClick() }}
                                     className="block py-2 pl-3 pr-4 rounded hover:bg-white hover:text-black"
                                 >
                                     Home
                                 </Link>
                             </li>
                             <li>
-                                <Link href="register"
+                                <Link href="register" onClick={() => { router.push("/register"); onMenuClick() }}
                                     className="block py-2 pl-3 pr-4 rounded hover:bg-white hover:text-black"
                                 >
                                     Sign up
