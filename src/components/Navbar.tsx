@@ -3,6 +3,7 @@ import React, { useContext, useState, } from 'react'
 import { GlobalContext } from '@/context'
 import { useRouter } from 'next/navigation'
 import Cookies from 'js-cookie'
+import Link from 'next/link'
 
 export default function Navbar() {
     const {
@@ -52,18 +53,18 @@ export default function Navbar() {
                     <div className={`items-center justify-between w-full md:flex md:w-auto ${navClick ? '' : 'hidden'}`} id="navbar-user">
                         <ul className={`flex flex-col font-medium p-4 md:p-0 mt-4  md:flex-row md:space-x-8   md:mt-0 md:border-0 `}>
                             <li>
-                                <a href="/"
+                                <Link href="/"
                                     className="block py-2 pl-3 pr-4 rounded hover:bg-white hover:text-black"
                                 >
                                     Home
-                                </a>
+                                </Link>
                             </li>
                             <li>
-                                <a href="register"
+                                <Link href="register"
                                     className="block py-2 pl-3 pr-4 rounded hover:bg-white hover:text-black"
                                 >
                                     Sign up
-                                </a>
+                                </Link>
                             </li>
                             <li>
                                 {
