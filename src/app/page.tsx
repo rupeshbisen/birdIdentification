@@ -10,7 +10,7 @@ import Image from "next/image";
 export default function Home() {
   const [products, setProducts] = useState<AddProductTypes>();
   const [fileName, setFileName] = useState('');
-  const { isAuthUser, componentLevelLoader, currentUpdatedProduct } = useContext(GlobalContext);
+  const { isAuthUser, componentLevelLoader } = useContext(GlobalContext);
 
   useEffect(() => {
     // Watch for changes in fileName and update audio source
