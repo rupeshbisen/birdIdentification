@@ -42,7 +42,7 @@ export default function Home() {
 
   return (
     <div>
-      <div className={`${isAuthUser ? "afterLoginbg" : "bgImg flex items-center"}`}>
+      <div className={`${isAuthUser ? "afterLoginbg" : "bgImg flex items-center justify-center"} pt-20`}>
         <div className="px-3 pt-5">
           <h1 className="text-white text-6xl font-extrabold text-center">AUTOMATED BIRD SPECIES IDENTIFICATION</h1>
           <p className="text-white text-3xl text-center mt-5">Using Audio Signal Processing and Neural Network</p>

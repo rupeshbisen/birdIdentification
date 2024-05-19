@@ -22,7 +22,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <GlobalState>
           <Navbar />
-          <main className='flex flex-col mt-16'>{children}</main>
+          <main className='flex flex-col h-screen'>{children}</main>
         </GlobalState>
       </body>
     </html>
