@@ -28,10 +28,11 @@ export async function GET(Request: Request) {
                 fileName: birdName,
                 "imagesUrl": imagesUrl
             };
-            console.log("data...",data);
+            console.log("data...", data);
             return NextResponse.json({
                 success: true,
-                data
+                data,
+                message: "The bird " + birdName,
             });
         } else {
             return NextResponse.json({

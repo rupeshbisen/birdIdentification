@@ -19,6 +19,7 @@ export default function Navbar() {
         Cookies.remove("token");
         localStorage.clear();
         router.push("/");
+        setNavClick(!navClick);
     }
     const [navClick, setNavClick] = useState(false);
 
@@ -71,7 +72,7 @@ export default function Navbar() {
                                             <p className='block py-2 pl-3 pr-4 rounded hover:bg-white hover:text-black'>log out</p>
                                         </button>
                                         :
-                                        <button onClick={() => router.push("/login")} >
+                                        <button onClick={() => { router.push("/login"); onMenuClick() }} >
                                             <p className='block py-2 pl-3 pr-4 rounded hover:bg-white hover:text-black'>Sign in</p>
                                         </button>
                                 }

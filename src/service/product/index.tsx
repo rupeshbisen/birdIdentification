@@ -1,7 +1,7 @@
 
 export const getAllAdminProducts = async (fileName:string) => {
     try {
-        const res = await fetch(`http://localhost:3000/api/all-products?fileName=${fileName}`, {
+        const res = await fetch(`/api/all-products?fileName=${fileName}`, {
             method: "GET",
             cache: "no-store",
         });

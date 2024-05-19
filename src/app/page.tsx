@@ -6,11 +6,13 @@ import { getAllAdminProducts } from "@/service/product";
 import { AddProductTypes } from "@/types/productTypes";
 import ComponentLevelLoader from "@/components/loader/ComponentLevelLoader";
 import Image from "next/image";
+import Notification from "@/components/Notification";
+import { toast } from "react-toastify";
 
 export default function Home() {
   const [products, setProducts] = useState<AddProductTypes>();
   const [fileName, setFileName] = useState('');
-  const { isAuthUser, componentLevelLoader } = useContext(GlobalContext);
+  const { isAuthUser, componentLevelLoader, setComponentLevelLoader } = useContext(GlobalContext);
 
   useEffect(() => {
     // Watch for changes in fileName and update audio source
@@ -23,9 +25,18 @@ export default function Home() {
   }, [fileName, products]);
 
   async function getListOfProducts() {
+    setComponentLevelLoader({ loading: true, id: "" });
     const res = await getAllAdminProducts(fileName);
     if (res.success) {
       setProducts(res.data);
+      toast.success(res.message, {
+        position: toast.POSITION.TOP_CENTER,
+      });
+      setComponentLevelLoader({ loading: false, id: "" });
+    } else {
+      toast.error(res.message, {
+        position: toast.POSITION.TOP_CENTER,
+      });
     }
   }
 
@@ -44,13 +55,13 @@ export default function Home() {
     <div>
       <div className={`${isAuthUser ? "afterLoginbg" : "bgImg flex items-center justify-center"} pt-20`}>
         <div className="px-3 pt-5">
-          <h1 className="text-white text-6xl font-extrabold text-center">AUTOMATED BIRD SPECIES IDENTIFICATION</h1>
-          <p className="text-white text-3xl text-center mt-5">Using Audio Signal Processing and Neural Network</p>
+          <h1 className="text-white text-3xl md:text-6xl font-extrabold text-center">AUTOMATED BIRD SPECIES IDENTIFICATION</h1>
+          <p className="text-white text-xl md:text-3xl text-center mt-5">Using Audio Signal Processing and Neural Network</p>
         </div>
         {isAuthUser && (
-          <div className="pt-5">
+          <div className="py-5">
             <h1 className="bg-gray-800 text-white p-2 text-center text-2xl font-bold">Bird Species Identification</h1>
-            <div className='max-w-screen-xl mx-auto px-16 mt-4 flex justify-center'>
+            <div className='max-w-screen-xl mx-auto px-16 mt-4 flex justify-center flex-wrap'>
               <div className="flex flex-col gap-16 m-5">
                 <input
                   className='text-black w-60'
@@ -63,15 +74,19 @@ export default function Home() {
                   onClick={getListOfProducts}
                   className="inline-flex items-center w-1/2 justify-center bg-blue-600 rounded py-2 px-3 text-base text-white font-medium uppercase tracking-wide"
                 >
-                  <ComponentLevelLoader
-                    text={componentLevelLoader && componentLevelLoader.loading ? 'Predict' : "Predict"}
-                    color="#ffffff"
-                    loading={componentLevelLoader && componentLevelLoader.loading}
-                  />
+                  {componentLevelLoader && componentLevelLoader.loading ? (
+                    <ComponentLevelLoader
+                      text={'Predict'}
+                      color="#ffffff"
+                      loading={componentLevelLoader && componentLevelLoader.loading}
+                    />
+                  ) : (
+                    "Predict"
+                  )}
                 </button>
               </div>
               {products && (
-                <div className="flex justify-between gap-4 bg-slate-400 rounded-md p-5">
+                <div className="flex flex-wrap justify-center gap-4 bg-slate-400 rounded-md p-5">
                   <div>
                     <Image src={products.imagesUrl} width={200} height={100} alt="bird image" className="object-contain aspect-square" />
                   </div>
@@ -92,6 +107,7 @@ export default function Home() {
           </div>
         )}
       </div>
+      <Notification />
     </div>
   );
 }
