@@ -68,9 +68,9 @@ export default function Login() {
     }, [isAuthUser, router]);
 
     return (
-        <div className="bgImg relative">
-            <div className="flex flex-col items-center justify-between pt-0 pb-0 px-4 md:px-10 mt-8 mr-auto xl:px-5 lg:flex-row">
-                <div className="flex flex-col justify-center items-center w-full lg:flex-row">
+        <div className="bgImg relative h-screen">
+            <div className="flex items-center justify-between h-screen pt-0 pb-0 px-4 md:px-10 mr-auto xl:px-5">
+                <div className="flex justify-center items-center w-full">
                     <div className="w-full mt-10 mr-0 mb-0 ml-0 relative max-w-2xl lg:mt-0 lg:w-5/12">
                         <div className="flex flex-col items-center justify-start p-5 md:p-10 bg-white shadow-2xl rounded-xl relative z-10">
                             <p className="w-full text-4xl font-medium text-center font-serif">

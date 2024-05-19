@@ -1,5 +1,5 @@
 'use client'
-import React, { useContext, } from 'react'
+import React, { useContext, useState, } from 'react'
 import { GlobalContext } from '@/context'
 import { useRouter } from 'next/navigation'
 import Cookies from 'js-cookie'
@@ -20,6 +20,11 @@ export default function Navbar() {
         localStorage.clear();
         router.push("/");
     }
+    const [navClick, setNavClick] = useState(false);
+
+    const onMenuClick = () => {
+        setNavClick(!navClick);
+    }
 
     return (
         <>
@@ -28,9 +33,23 @@ export default function Navbar() {
                     <div onClick={() => router.push('/')} className='flex items-center cursor-pointer p-2 rounded hover:bg-white hover:text-black '>
                         BIRD AUDIO DETECTION
                     </div>
-                    <div className='flex md:order-2 gap-2'>
-
-                        <ul className={`flex flex-col font-medium p-4 md:p-0 mt-4 bg-white shadow-lg shadow-slate-500/50 rounded-lg md:flex-row md:space-x-8 md:bg-transparent md:shadow-none  md:mt-0 md:border-0 `}>
+                    <button data-collapse-toggle="navbar-user" type="button"
+                        onClick={(e) => { e.preventDefault(); onMenuClick() }}
+                        className={`inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-white rounded-lg md:hidden`}
+                        aria-controls="navbar-user" aria-expanded="false">
+                        {!navClick &&
+                            <svg className="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
+                                <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 1h15M1 7h15M1 13h15" />
+                            </svg>
+                        }
+                        {navClick &&
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                            </svg>
+                        }
+                    </button>
+                    <div className={`items-center justify-between w-full md:flex md:w-auto ${navClick ? '' : 'hidden'}`} id="navbar-user">
+                        <ul className={`flex flex-col font-medium p-4 md:p-0 mt-4  md:flex-row md:space-x-8   md:mt-0 md:border-0 `}>
                             <li>
                                 <a href="/"
                                     className="block py-2 pl-3 pr-4 rounded hover:bg-white hover:text-black"
@@ -45,18 +64,20 @@ export default function Navbar() {
                                     Sign up
                                 </a>
                             </li>
+                            <li>
+                                {
+                                    isAuthUser ?
+                                        <button onClick={handelLogout} >
+                                            <p className='block py-2 pl-3 pr-4 rounded hover:bg-white hover:text-black'>log out</p>
+                                        </button>
+                                        :
+                                        <button onClick={() => router.push("/login")} >
+                                            <p className='block py-2 pl-3 pr-4 rounded hover:bg-white hover:text-black'>Sign in</p>
+                                        </button>
+                                }
+                            </li>
                         </ul>
 
-                        {
-                            isAuthUser ?
-                                <button onClick={handelLogout} className='mx-1 md:mx-3'>
-                                    <p className='block py-2 pl-3 pr-4 rounded hover:bg-white hover:text-black'>log out</p>
-                                </button>
-                                :
-                                <button onClick={() => router.push("/login")} className='mx-1 md:mx-3'>
-                                    <p className='block py-2 pl-3 pr-4 rounded hover:bg-white hover:text-black'>Sign in</p>
-                                </button>
-                        }
                     </div>
 
                 </div>
